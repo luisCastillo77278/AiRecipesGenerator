@@ -1,4 +1,4 @@
-import Icon from '@expo/vector-icons/ionicons';
+import { Ionicons } from '@expo/vector-icons';
 import { ComponentProps, FunctionComponent } from 'react';
 import {
   DimensionValue,
@@ -14,7 +14,7 @@ interface Props extends TouchableOpacityProps {
   active?: boolean;
   icon?: boolean;
   endIcon?: boolean;
-  iconName?: ComponentProps<typeof Icon>['name'];
+  iconName?: ComponentProps<typeof Ionicons>['name'];
   bgColor?: string;
   color?: string;
   paddingX?: DimensionValue;
@@ -62,9 +62,9 @@ const Button: FunctionComponent<Props> = ({
   return (
     <TouchableOpacity style={styles.content} {...touchableProps}>
       {
-        icon ? <Icon name={iconName!} size={20} color={color} /> : null
+        icon ? <Ionicons name={iconName!} size={20} color={color} /> : null
       }
-     { text ? <Text style={styles.text}>{text}</Text> : null}
+      {text ? <Text style={styles.text}>{text}</Text> : null}
     </TouchableOpacity>
   );
 };

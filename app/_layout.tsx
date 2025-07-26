@@ -1,10 +1,14 @@
-import { Stack } from "expo-router";
+import { Slot } from "expo-router";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import AuthProvider from "../Auth/AuthProvider";
 
 const Layout = () => {
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-    </Stack>
+    <SafeAreaProvider>
+      <AuthProvider>
+        <Slot />
+      </AuthProvider>
+    </SafeAreaProvider>
   )
 }
 
