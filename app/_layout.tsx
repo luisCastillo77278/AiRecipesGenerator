@@ -1,6 +1,6 @@
+import AuthProvider from "@auth/AuthProvider";
 import { Slot } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import AuthProvider from "../Auth/AuthProvider";
 
 const Layout = () => {
   return (
