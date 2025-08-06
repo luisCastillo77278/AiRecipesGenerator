@@ -16,7 +16,9 @@ const TabsLayout = () => {
         },
         tabBarShowLabel: false,
       }}
-      tabBar={() => (
+      tabBar={({ state }) => {
+        console.log({ state: state.routes })
+        return (
         <View style={styles.tabContainer}>
           {/* Left tab */}
           <SearchButtonTab />
@@ -27,8 +29,11 @@ const TabsLayout = () => {
           {/* Right tab */}
           <FavoriteButtonTab />
         </View>
-      )}
-    />
+      )}}
+    >
+      <Tabs.Screen name="index" />
+      <Tabs.Screen name="favorites" />
+   </Tabs>
   )
 }
 

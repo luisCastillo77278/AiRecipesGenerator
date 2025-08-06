@@ -3,11 +3,21 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@components/*": ["./components/*"],
-      "@models/*": ["./models/*"],
-      "@assets/*": ["./assets/*"],
-      "@auth/*": ["./auth/*"],
-      "@store/*": ["./store/*"],
+      "@components/*": [
+        "./components/*"
+      ],
+      "@models/*": [
+        "./models/*"
+      ],
+      "@assets/*": [
+        "./assets/*"
+      ],
+      "@auth/*": [
+        "./auth/*"
+      ],
+      "@store/*": [
+        "./store/*"
+      ],
     }
   }
 }

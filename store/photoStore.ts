@@ -15,19 +15,10 @@ export const usePhotoStore = create<PhotoStore>((set) => ({
 }))
 
 export const usePhoto = () => {
-  const [
-    photo,
-    addPhoto,
-    removePhoto,
-    clearPhotos
-  ] = usePhotoStore(
-    (state) => [
-      state.photo, 
-      state.addPhoto, 
-      state.removePhoto, 
-      state.clearPhotos
-    ]
-  );
+  const photo = usePhotoStore((state) => state.photo);
+  const addPhoto = usePhotoStore((state) => state.addPhoto);
+  const removePhoto = usePhotoStore((state) => state.removePhoto);
+  const clearPhotos = usePhotoStore((state) => state.clearPhotos);
 
   return {
     photo,

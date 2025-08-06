@@ -1,13 +1,13 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import { Animated, DimensionValue, StyleSheet, TextInput, TextInputProps, View } from 'react-native';
 
-interface Props extends TextInputProps{
+interface Props extends TextInputProps {
   label: string;
   value?: string;
   margin?: DimensionValue
 }
 
-const TextField: FC<Props> = ({
+const TextFloating: FC<Props> = ({
   label,
   value,
   margin,
@@ -19,7 +19,7 @@ const TextField: FC<Props> = ({
   useEffect(() => {
     console.log({ isFocused });
     Animated.timing(fadeAnimate, {
-      toValue: isFocused  ? 1 : 0,
+      toValue: isFocused ? 1 : 0,
       duration: 150,
       useNativeDriver: false,
     }).start();
@@ -70,7 +70,7 @@ const TextField: FC<Props> = ({
     <View style={styles.container}>
       <Animated.Text
         style={[styles.label, stylingLabel]}>
-          {label}
+        {label}
       </Animated.Text>
       <TextInput
         value={value}
@@ -85,4 +85,4 @@ const TextField: FC<Props> = ({
 
 
 
-export default TextField;
+export default TextFloating;

@@ -1,14 +1,19 @@
-import { Link, router } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { usePhoto } from "@store/photoStore";
+import { Link, router, useLocalSearchParams } from "expo-router";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Modal = () => {
   const isPresented = router.canGoBack();
+  const { photo } = usePhoto();
+
+  console.log({ photo })
 
   return (
     <SafeAreaView style={styles.layout}>
       <View style={styles.container}>
         <Text>Modal</Text>
+        <Image source={{ uri: photo }} style={{ width: 200, height: 200 }} />
         {isPresented && <Link href="../">Dismiss modal</Link>}
       </View>
     </SafeAreaView>

@@ -10,6 +10,17 @@ export default function App() {
   );
 }
 
+//eas build —platform android —profile development
+// eas build —platform android —profile production
+// eas build —platform android —profile preview
+
+// eas build --profile development
+// eas build --profile preview
+
+// que sea un proyecto funcional
+// con variables de entorno que por lo menos tenga login
+// con usuario y contraseña de prueba 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -1,10 +1,12 @@
 import { Ionicons } from '@expo/vector-icons';
+import { usePhoto } from '@store/photoStore';
 import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router';
 import { Alert, Pressable, StyleSheet } from "react-native";
 
 const PictureButtomTab = () => {
   const router = useRouter();
+  const { addPhoto } = usePhoto();
 
   const handlePicturePress = () => {
     Alert.alert('Selecciona una opción', '', [
@@ -21,9 +23,10 @@ const PictureButtomTab = () => {
 
             if (!result.canceled) {
               router.push({
-                pathname: '/camera',
-                params: { image: result.assets[0].uri },
+                pathname: '/modal',
+                // params: { image: JSON.stringify(result.assets[0].uri )},
               });
+              addPhoto(result.assets[0].uri);
             }
           }
         },
@@ -43,18 +46,16 @@ const PictureButtomTab = () => {
 
             if (!result.canceled) {
               router.push({
-                pathname: '/camera',
-                params: { image: result.assets[0].uri },
+                pathname: '/modal',
+                // params: { image: result.assets[0].uri },
               });
+              addPhoto(result.assets[0].uri);
             }
           }
         },
       },
       { text: 'Cancelar', style: 'cancel' },
     ]);
-
-
-    //router.push('/camera');
   }
 
   return (
@@ -77,6 +78,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 60,
     elevation: 5,
+    boxShadow: `0px 2px 5px rgba(0, 0, 0, 0.2)`,
   },
 })
 
