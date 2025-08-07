@@ -21,9 +21,10 @@ const TextField: FC<Props> = ({
     },
     textInput: {
       borderWidth: 1,
-      borderColor: '#6200ee',
+      borderColor: 'tomato',
       borderRadius: 4,
-      padding: 10,
+      paddingHorizontal: 10,
+      paddingVertical: 15,
       fontSize: 16,
       color: '#000',
       backgroundColor: '#ffff',

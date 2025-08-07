@@ -13,7 +13,7 @@
         "./assets/*"
       ],
       "@auth/*": [
-        "./auth/*"
+        "./Auth/*"
       ],
       "@store/*": [
         "./store/*"

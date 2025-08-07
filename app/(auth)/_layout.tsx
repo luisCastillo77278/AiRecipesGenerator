@@ -1,6 +1,6 @@
 import { Redirect, Stack } from "expo-router";
 
-const isAuthenticated = true;
+const isAuthenticated = false;
 
 export const unstable_settings = {
   initialRouteName: '(tabs)',
@@ -9,7 +9,7 @@ export const unstable_settings = {
 const AuthLayout = () => {
 
   if (!isAuthenticated) {
-    return <Redirect href="/sign-in" />;
+    return <Redirect href="/auth" />;
   }
 
   return (

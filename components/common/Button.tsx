@@ -17,10 +17,16 @@ interface Props extends TouchableOpacityProps {
   iconName?: ComponentProps<typeof Ionicons>['name'];
   bgColor?: string;
   color?: string;
+  padding?: DimensionValue,
   paddingX?: DimensionValue;
   paddingY?: DimensionValue;
   width?: DimensionValue,
-  height?: DimensionValue
+  height?: DimensionValue,
+  margin?: DimensionValue,
+  marginTop?: DimensionValue,
+  marginBottom?: DimensionValue,
+  marginLeft?: DimensionValue,
+  marginRight?: DimensionValue,
 }
 
 const Button: FunctionComponent<Props> = ({
@@ -31,16 +37,27 @@ const Button: FunctionComponent<Props> = ({
   rounded,
   bgColor,
   color,
+  padding = 0,
   paddingX = 10,
   paddingY = 5,
   width = 'auto',
   height = 'auto',
+  margin = 0,
+  marginTop = 0,
+  marginBottom = 0,
+  marginLeft = 0,
+  marginRight = 0,
   ...touchableProps
 }) => {
 
   const styles = StyleSheet.create({
     content: {
-      margin: 5,
+      margin: margin,
+      marginTop: marginTop,
+      marginBottom: marginBottom,
+      marginLeft: marginLeft,
+      marginRight: marginRight,
+      padding: padding,
       borderRadius: typeof rounded === 'string' ? `${rounded}` : rounded,
       flexDirection: !endIcon ? 'row' : 'row-reverse',
       justifyContent: icon && text ? 'space-between' : 'center',
@@ -55,7 +72,7 @@ const Button: FunctionComponent<Props> = ({
     text: {
       color: color,
       fontSize: 16,
-      fontWeight: '500',
+      fontWeight: '600',
     },
   });
 
