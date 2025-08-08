@@ -25,7 +25,7 @@ const TextField: FC<IProps> = (
         style={styles.input} 
         placeholder={placeholder} 
         {...props}  
-        onChange={helper.setValue}
+        onChangeText={helper.setValue}
         value={field.value}
         onBlur={() => helper.setTouched(true)}
         onFocus={() => helper.setTouched(false)}

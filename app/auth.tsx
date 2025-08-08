@@ -1,6 +1,7 @@
 import SignIn from "@components/SignIn";
+import SignUp from "@components/SignUp";
 import { useRef } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import PagerView from 'react-native-pager-view';
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -8,7 +9,6 @@ const Auth = () => {
   const pageRef = useRef<PagerView | null>(null);
 
   const handleSignUp = () => {
-    console.log('sign up');
     pageRef.current?.setPage(1)
   }
 
@@ -29,19 +29,18 @@ const Auth = () => {
             <SignIn onGoSingUp={handleSignUp} />
           </View>
           <View key={1}>
-            <Text>sign up</Text>
+            <SignUp onGoSingIn={handleSignIn} />
           </View>
         </PagerView>
 
-        <View style={styles.buttonsGroup}>
+        {/* <View style={styles.buttonsGroup}>
           <TouchableOpacity style={styles.buttonTab} onPress={handleSignIn}>
             <Text>sign in</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonTab} onPress={handleSignUp}>
             <Text>sign up</Text>
           </TouchableOpacity>
-        </View>
-
+        </View> */}
       </View>
     </SafeAreaView>
   );
@@ -59,18 +58,6 @@ const styles = StyleSheet.create({
   slideView: {
     flex: 1,
   },
-  buttonsGroup: {
-    flexDirection: 'row',
-    columnGap: 10,
-    padding: 5,
-  },
-  buttonTab: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    backgroundColor: 'cyan',
-    flexGrow: 1
-  }
-
 });
 
 export default Auth;

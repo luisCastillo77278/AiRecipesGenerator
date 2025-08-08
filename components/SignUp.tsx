@@ -1,47 +1,31 @@
 import { Formik } from "formik";
 import { FC } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import * as Yup from 'yup';
 import Button from "./common/Button";
 import TextField from "./common/Forms/TextField";
 import Divider from "./core/Divider";
 
-const scheme = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Required'),
-  password: Yup.string().min(6, 'Too Short!').required('Required'),
-})
-
 interface IProps {
-  onGoSingUp: () => void
+  onGoSingIn: () => void
 }
 
-const SignIn: FC<IProps> = ({
-  onGoSingUp
+const SignUp: FC<IProps> = ({
+  onGoSingIn
 }) => {
 
   return (
     <View>
-      <Text style={styles.title}>Welcome to back</Text>
-      <Formik 
-        initialValues={{ email: '', password: '' }} 
+      <Text style={styles.title}>Create Account</Text>
+      <Formik
+        initialValues={{ password: '', email: '', username: ''}}
         onSubmit={(values) => console.log(values)}
-        validationSchema={scheme}
       >
         {
           () => (
             <View style={{ rowGap: 10 }}>
-              <TextField 
-                label="Email" 
-                name="email" 
-                placeholder="Enter your email" 
-                keyboardType="email-address"
-              />
-              <TextField 
-                label="Password" 
-                name="password" 
-                placeholder="Enter your password"
-                secureTextEntry={true}  
-              />
+              <TextField label="Username" name="username" placeholder="Enter your username" />
+              <TextField label="Email" name="email" placeholder="Enter your email" />
+              <TextField label="Password" name="password" placeholder="Enter your password" />
               <Button 
                 text="Continue" 
                 rounded={10} 
@@ -51,26 +35,24 @@ const SignIn: FC<IProps> = ({
                 color="white"  
                 marginTop={15} 
               />
-            </View>     
+            </View>
           )
         }
       </Formik>
-        
-      <Divider text="Or" />
       
+      <Divider text="Or" />
+
       <View>
         {/* aqui va boton google */}
         {/* aqui va boton facebook */}
       </View>
 
-
       <View style={styles.signUpPromptContainer}>
-        <Text style={styles.signUpPromptText}>Don't have an account?</Text>
-        <TouchableOpacity onPress={onGoSingUp}>
-          <Text style={styles.signUpLinkText}>Sign up</Text>
+        <Text style={styles.signUpPromptText}>Already have an account?</Text>
+        <TouchableOpacity onPress={onGoSingIn}>
+          <Text style={styles.signUpLinkText}>Sign in</Text>
         </TouchableOpacity>
       </View>
-
     </View>
   )
 }
@@ -101,4 +83,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default SignIn;
+export default SignUp;
