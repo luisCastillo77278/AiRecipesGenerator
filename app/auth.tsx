@@ -32,15 +32,6 @@ const Auth = () => {
             <SignUp onGoSingIn={handleSignIn} />
           </View>
         </PagerView>
-
-        {/* <View style={styles.buttonsGroup}>
-          <TouchableOpacity style={styles.buttonTab} onPress={handleSignIn}>
-            <Text>sign in</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTab} onPress={handleSignUp}>
-            <Text>sign up</Text>
-          </TouchableOpacity>
-        </View> */}
       </View>
     </SafeAreaView>
   );
