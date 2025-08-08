@@ -18,6 +18,12 @@
       "@store/*": [
         "./store/*"
       ],
+      "@theme/*": [
+        "./theme/*"
+      ],
+      "@constants/*": [
+        "./constants/*"
+      ]
     }
   }
 }
