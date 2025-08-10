@@ -1,45 +1,95 @@
-import { Formik } from "formik";
-import { FC } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import Button from "./common/Button";
-import TextField from "./common/Forms/TextField";
-import Divider from "./core/Divider";
+import useTheme from '@theme/useTheme';
+import { Formik } from 'formik';
+import { FC } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import * as Yup from 'yup';
+import Button from './common/Button';
+import PasswordTextField from './common/Forms/PasswordTextField';
+import TextField from './common/Forms/TextField';
+import Divider from './core/Divider';
 
 interface IProps {
-  onGoSingIn: () => void
+  onGoSingIn: () => void;
 }
 
-const SignUp: FC<IProps> = ({
-  onGoSingIn
-}) => {
+const schema = Yup.object().shape({
+  username: Yup.string().min(3, 'Too Short!'),
+  email: Yup.string().email('Invalid email').required('Required'),
+  password: Yup.string().min(6, 'Too Short!').required('Required'),
+});
 
+const SignUp: FC<IProps> = ({ onGoSingIn }) => {
+  const { paletteColors } = useTheme();
   return (
     <View>
       <Text style={styles.title}>Create Account</Text>
       <Formik
-        initialValues={{ password: '', email: '', username: ''}}
+        initialValues={{ password: '', email: '', username: '' }}
         onSubmit={(values) => console.log(values)}
+        validationSchema={schema}
       >
-        {
-          () => (
-            <View style={{ rowGap: 10 }}>
-              <TextField label="Username" name="username" placeholder="Enter your username" />
-              <TextField label="Email" name="email" placeholder="Enter your email" />
-              <TextField label="Password" name="password" placeholder="Enter your password" />
-              <Button 
-                text="Continue" 
-                rounded={10} 
-                paddingX={10} 
-                paddingY={13} 
-                bgColor="tomato" 
-                color="white"  
-                marginTop={15} 
-              />
-            </View>
-          )
-        }
+        {({
+          handleSubmit,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          values,
+        }) => (
+          <View style={{ rowGap: 10 }}>
+            <TextField
+              label="Username"
+              name="username"
+              placeholder="Enter your username"
+              brColor={paletteColors.primary.DEFAULT}
+              isIcon
+              iconName="person"
+              errors={errors.username}
+              touched={touched.username}
+              onBlur={handleBlur('username')}
+              onChangeText={handleChange('username')}
+              value={values.username}
+            />
+            <TextField
+              label="Email"
+              name="email"
+              placeholder="Enter your email"
+              required
+              brColor={paletteColors.primary.DEFAULT}
+              isIcon
+              iconName="mail"
+              errors={errors.email}
+              touched={touched.email}
+              onBlur={handleBlur('email')}
+              onChangeText={handleChange('email')}
+              value={values.email}
+            />
+            <PasswordTextField
+              label="Password"
+              name="password"
+              placeholder="Enter your password"
+              required
+              brColor={paletteColors.primary.DEFAULT}
+              errors={errors.password}
+              touched={touched.password}
+              onBlur={handleBlur('password')}
+              onChangeText={handleChange('password')}
+              value={values.password}
+            />
+            <Button
+              text="Continue"
+              rounded={10}
+              paddingX={10}
+              paddingY={13}
+              bgColor={paletteColors.primary.DEFAULT}
+              color="white"
+              marginTop={15}
+              onPress={() => handleSubmit()}
+            />
+          </View>
+        )}
       </Formik>
-      
+
       <Divider text="Or" />
 
       <View>
@@ -50,12 +100,19 @@ const SignUp: FC<IProps> = ({
       <View style={styles.signUpPromptContainer}>
         <Text style={styles.signUpPromptText}>Already have an account?</Text>
         <TouchableOpacity onPress={onGoSingIn}>
-          <Text style={styles.signUpLinkText}>Sign in</Text>
+          <Text
+            style={[
+              styles.signUpLinkText,
+              { color: paletteColors.primary.DEFAULT },
+            ]}
+          >
+            Sign in
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   signUpPromptContainer: {
@@ -78,9 +135,9 @@ const styles = StyleSheet.create({
     letterSpacing: 0.2,
     fontSize: 24,
     fontWeight: '600',
-    marginBottom: 10,
+    marginBottom: 30,
     textAlign: 'center',
-  }
-})
+  },
+});
 
 export default SignUp;

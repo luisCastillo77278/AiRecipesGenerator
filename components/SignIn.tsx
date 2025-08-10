@@ -1,8 +1,10 @@
+import useTheme from '@theme/useTheme';
 import { Formik } from 'formik';
 import { FC } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import * as Yup from 'yup';
 import Button from './common/Button';
+import PasswordTextField from './common/Forms/PasswordTextField';
 import TextField from './common/Forms/TextField';
 import Divider from './core/Divider';
 
@@ -16,6 +18,8 @@ interface IProps {
 }
 
 const SignIn: FC<IProps> = ({ onGoSingUp }) => {
+  const { paletteColors } = useTheme();
+
   return (
     <View>
       <Text style={styles.title}>Welcome to back</Text>
@@ -24,28 +28,51 @@ const SignIn: FC<IProps> = ({ onGoSingUp }) => {
         onSubmit={(values) => console.log(values)}
         validationSchema={scheme}
       >
-        {() => (
+        {({
+          handleSubmit,
+          handleBlur,
+          handleChange,
+          values,
+          errors,
+          touched,
+        }) => (
           <View style={{ rowGap: 10 }}>
             <TextField
               label="Email"
               name="email"
               placeholder="Enter your email"
               keyboardType="email-address"
+              isIcon
+              iconName="mail"
+              required
+              errors={errors.email}
+              touched={touched.email}
+              onBlur={handleBlur('email')}
+              onChangeText={handleChange('email')}
+              value={values.email}
+              brColor={paletteColors.primary.DEFAULT}
             />
-            <TextField
+            <PasswordTextField
               label="Password"
               name="password"
               placeholder="Enter your password"
-              secureTextEntry={true}
+              required
+              errors={errors.password}
+              touched={touched.password}
+              onBlur={handleBlur('password')}
+              onChangeText={handleChange('password')}
+              value={values.password}
+              brColor={paletteColors.primary.DEFAULT}
             />
             <Button
               text="Continue"
               rounded={10}
               paddingX={10}
               paddingY={13}
-              bgColor="tomato"
+              bgColor={paletteColors.primary.DEFAULT}
               color="white"
               marginTop={15}
+              onPress={() => handleSubmit()}
             />
           </View>
         )}
@@ -61,7 +88,14 @@ const SignIn: FC<IProps> = ({ onGoSingUp }) => {
       <View style={styles.signUpPromptContainer}>
         <Text style={styles.signUpPromptText}>Dont have an account?</Text>
         <TouchableOpacity onPress={onGoSingUp}>
-          <Text style={styles.signUpLinkText}>Sign up</Text>
+          <Text
+            style={[
+              styles.signUpLinkText,
+              { color: paletteColors.primary.DEFAULT },
+            ]}
+          >
+            Sign up
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -89,7 +123,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.2,
     fontSize: 24,
     fontWeight: '600',
-    marginBottom: 10,
+    marginBottom: 30,
     textAlign: 'center',
   },
 });
