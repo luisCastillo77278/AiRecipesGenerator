@@ -13,6 +13,7 @@ export type ThemeVariant = {
   accent: ColorShades;
   background: string;
   text: string;
+  error: string;
 }
 
 export type ColorsTheme = Record<ThemeTypes, ThemeVariant>;

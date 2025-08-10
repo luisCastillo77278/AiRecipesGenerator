@@ -20,6 +20,7 @@ export const Colors: ColorsTheme = {
     },
     background: '#F9FAFB', // gray-50
     text: '#1F2937',       // gray-800
+    error: '#dc2626',      // red-600
   },
    dark: {
     primary: {
@@ -39,5 +40,6 @@ export const Colors: ColorsTheme = {
     },
     background: '#111827', // gray-900
     text: '#F9FAFB',       // gray-50
+    error: '#dc2626',      // red-600
   }
 } as const;
