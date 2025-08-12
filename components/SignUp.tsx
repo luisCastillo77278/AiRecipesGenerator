@@ -1,10 +1,10 @@
-import { ISignUpCredentials } from '@auth/Auth.interface';
-import useAuth from '@auth/useAuth';
 import useTheme from '@theme/useTheme';
 import { Formik } from 'formik';
 import { FC } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import * as Yup from 'yup';
+import { ISignUpCredentials } from '../auth/Auth.interface';
+import useAuth from '../auth/useAuth';
 import Button from './common/Button';
 import PasswordTextField from './common/Forms/PasswordTextField';
 import TextField from './common/Forms/TextField';

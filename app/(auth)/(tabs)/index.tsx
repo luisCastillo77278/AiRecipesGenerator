@@ -1,9 +1,9 @@
-import useAuth from '@auth/useAuth';
 import Button from '@components/common/Button';
-import Search from '@components/core/Search';
+import SearchButton from '@components/core/SearchButton';
 import { Link } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import useAuth from '../../../auth/useAuth';
 
 const Home = () => {
   const { SignOut } = useAuth();
@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <SafeAreaView style={styles.layout}>
       <View style={[styles.container]}>
-        <Search />
+        <SearchButton />
 
         <Link
           href="/modal"

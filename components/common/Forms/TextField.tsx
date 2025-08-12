@@ -91,13 +91,6 @@ const TextField: FC<IProps> = ({
           <Ionicons name={iconName!} size={20} color={brColor} />
         ) : null}
         <TextInput style={styles.input} placeholder={placeholder} {...props} />
-        {/* {onPressIcon ? (
-          <SecureIcon
-            secureTextEntry={props.secureTextEntry}
-            onPressIcon={onPressIcon}
-            color={brColor}
-          />
-        ) : null} */}
         {iconAction ? iconAction() : null}
       </View>
       {touched && errors ? <HelperErrorText errorText={errors} /> : null}

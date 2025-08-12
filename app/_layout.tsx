@@ -1,10 +1,10 @@
-import AuthProvider from '@auth/AuthProvider';
 import ThemeProvider from '@theme/ThemeProvider';
 import { useFonts } from 'expo-font';
 import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import AuthProvider from '../auth/AuthProvider';
 
 SplashScreen.preventAutoHideAsync();
 

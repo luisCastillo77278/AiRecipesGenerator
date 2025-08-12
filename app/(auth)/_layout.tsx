@@ -1,5 +1,5 @@
-import useAuth from '@auth/useAuth';
 import { Redirect, Stack } from 'expo-router';
+import useAuth from '../../auth/useAuth';
 
 export const unstable_settings = {
   initialRouteName: '(tabs)',
