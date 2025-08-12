@@ -1,12 +1,17 @@
 import { Ionicons } from '@expo/vector-icons';
-import { ComponentProps, FC } from 'react';
-import { StyleSheet, TextInput, TextInputProps, View } from 'react-native';
+import { ComponentProps, FC, ReactNode } from 'react';
+import {
+  DimensionValue,
+  StyleSheet,
+  TextInput,
+  TextInputProps,
+  View,
+} from 'react-native';
 import HelperErrorText from './HelperErrorText';
 import Label from './Label';
-import SecureIcon from './SecureIcon';
 
 interface IProps extends TextInputProps {
-  label: string;
+  label?: string;
   name: string;
   placeholder?: string;
   required?: boolean;
@@ -16,19 +21,34 @@ interface IProps extends TextInputProps {
   iconName?: ComponentProps<typeof Ionicons>['name'];
   isIcon?: boolean;
   onPressIcon?: () => void;
+  brWidth?: number;
+  bgColor?: string;
+  elevation?: number;
+  brRadius?: number;
+  padding?: DimensionValue;
+  paddingX?: DimensionValue;
+  paddingY?: DimensionValue;
+  iconAction?: () => ReactNode;
 }
 
 const TextField: FC<IProps> = ({
-  label,
   name,
   placeholder,
   iconName,
-  onPressIcon = null,
+  elevation = 0,
+  label = '',
+  iconAction = null,
   touched = false,
   errors = '',
   isIcon = false,
-  brColor = 'tomato',
   required = false,
+  bgColor = '#ffff',
+  brColor = 'tomato',
+  brWidth = 1,
+  brRadius = 10,
+  padding = 0,
+  paddingX = 10,
+  paddingY = 5,
   ...props
 }) => {
   const styles = StyleSheet.create({
@@ -49,12 +69,14 @@ const TextField: FC<IProps> = ({
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      borderWidth: 1,
+      borderWidth: brWidth,
       borderColor: brColor,
-      borderRadius: 10,
-      paddingHorizontal: 10,
-      paddingVertical: 5,
+      borderRadius: brRadius,
+      paddingHorizontal: paddingX,
+      paddingVertical: paddingY,
       columnGap: 5,
+      backgroundColor: bgColor,
+      elevation: elevation,
     },
     button: {
       padding: 8,
@@ -63,19 +85,20 @@ const TextField: FC<IProps> = ({
 
   return (
     <View style={styles.container}>
-      <Label text={label} required={required} />
+      {label ? <Label text={label} required={required} /> : null}
       <View style={styles.wrapperInput}>
         {isIcon ? (
           <Ionicons name={iconName!} size={20} color={brColor} />
         ) : null}
         <TextInput style={styles.input} placeholder={placeholder} {...props} />
-        {onPressIcon ? (
+        {/* {onPressIcon ? (
           <SecureIcon
             secureTextEntry={props.secureTextEntry}
             onPressIcon={onPressIcon}
             color={brColor}
           />
-        ) : null}
+        ) : null} */}
+        {iconAction ? iconAction() : null}
       </View>
       {touched && errors ? <HelperErrorText errorText={errors} /> : null}
     </View>

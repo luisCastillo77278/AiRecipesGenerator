@@ -1,20 +1,52 @@
-import { Link } from "expo-router";
-import { Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import useAuth from '@auth/useAuth';
+import Button from '@components/common/Button';
+import Search from '@components/core/Search';
+import { Link } from 'expo-router';
+import { StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Home = () => {
+  const { SignOut } = useAuth();
+
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View>
-        <Text>Home</Text>
-        <Link href="/modal" style={{
-          paddingTop: 20,
-        }}>
+    <SafeAreaView style={styles.layout}>
+      <View style={[styles.container]}>
+        <Search />
+
+        <Link
+          href="/modal"
+          style={{
+            padding: 20,
+            backgroundColor: 'red',
+            color: 'white',
+            marginBottom: 10,
+            borderRadius: 10,
+          }}
+        >
           Open modal
         </Link>
+
+        <Button
+          onPress={SignOut}
+          text="Sign out"
+          width="50%"
+          bgColor="red"
+          color="white"
+        />
       </View>
     </SafeAreaView>
-  )
-}
+  );
+};
+
+const styles = StyleSheet.create({
+  layout: {
+    flex: 1,
+  },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 export default Home;

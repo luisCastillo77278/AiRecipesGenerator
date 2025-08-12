@@ -1,4 +1,7 @@
+import { ISignInCredentials } from '@auth/Auth.interface';
+import useAuth from '@auth/useAuth';
 import useTheme from '@theme/useTheme';
+import { useRouter } from 'expo-router';
 import { Formik } from 'formik';
 import { FC } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -19,13 +22,34 @@ interface IProps {
 
 const SignIn: FC<IProps> = ({ onGoSingUp }) => {
   const { paletteColors } = useTheme();
+  const { SignInWithEmailAndPassword } = useAuth();
+  const router = useRouter();
+
+  const handleSubmit = async (values: ISignInCredentials) => {
+    try {
+      console.log('login');
+      const response = await SignInWithEmailAndPassword({
+        email: values.email,
+        password: values.password,
+      });
+      console.log(response);
+
+      if (!response.success) {
+        console.log(response);
+      }
+
+      router.navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View>
       <Text style={styles.title}>Welcome to back</Text>
-      <Formik
+      <Formik<ISignInCredentials>
         initialValues={{ email: '', password: '' }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => handleSubmit(values)}
         validationSchema={scheme}
       >
         {({
@@ -122,7 +146,6 @@ const styles = StyleSheet.create({
   title: {
     letterSpacing: 0.2,
     fontSize: 24,
-    fontWeight: '600',
     marginBottom: 30,
     textAlign: 'center',
   },

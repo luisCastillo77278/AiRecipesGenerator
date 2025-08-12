@@ -18,7 +18,7 @@ export const Colors: ColorsTheme = {
       light: '#FDA4AF',   // rose-300
       dark: '#9F1239',    // rose-800
     },
-    background: '#F9FAFB', // gray-50
+    background: '#f3f4f6', // gray-50
     text: '#1F2937',       // gray-800
     error: '#dc2626',      // red-600
   },

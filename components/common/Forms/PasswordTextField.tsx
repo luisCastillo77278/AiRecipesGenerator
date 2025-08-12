@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { TextInputProps } from 'react-native';
+import SecureIcon from './SecureIcon';
 import TextField from './TextField';
 
 interface IProps extends TextInputProps {
@@ -16,7 +17,7 @@ const PasswordTextField: FC<IProps> = ({
   label,
   name,
   placeholder,
-  brColor,
+  brColor = '#000',
   required = false,
   touched = false,
   errors = '',
@@ -39,6 +40,13 @@ const PasswordTextField: FC<IProps> = ({
       isIcon
       iconName="key"
       onPressIcon={togglePasswordVisibility}
+      iconAction={() => (
+        <SecureIcon
+          secureTextEntry={showPassword}
+          onPressIcon={togglePasswordVisibility}
+          color={brColor}
+        />
+      )}
       touched={touched}
       errors={errors}
       {...props}

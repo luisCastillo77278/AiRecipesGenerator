@@ -1,15 +1,17 @@
 import { Ionicons } from '@expo/vector-icons';
 import { usePhoto } from '@store/photoStore';
+import useTheme from '@theme/useTheme';
 import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router';
-import { Alert, Pressable, StyleSheet } from "react-native";
+import { Alert, AlertButton, Pressable, StyleSheet } from 'react-native';
 
 const PictureButtomTab = () => {
   const router = useRouter();
   const { addPhoto } = usePhoto();
+  const { paletteColors } = useTheme();
 
   const handlePicturePress = () => {
-    Alert.alert('Selecciona una opción', '', [
+    const buttons: AlertButton[] = [
       {
         text: 'Tomar foto',
         onPress: async () => {
@@ -34,7 +36,8 @@ const PictureButtomTab = () => {
       {
         text: 'Elegir de galería',
         onPress: async () => {
-          const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+          const permission =
+            await ImagePicker.requestMediaLibraryPermissionsAsync();
           if (permission.granted) {
             const result = await ImagePicker.launchImageLibraryAsync({
               quality: 0.7,
@@ -55,31 +58,35 @@ const PictureButtomTab = () => {
         },
       },
       { text: 'Cancelar', style: 'cancel' },
-    ]);
-  }
+    ];
+
+    Alert.alert('Selecciona una opción', '', buttons, { cancelable: true });
+  };
 
   return (
     <Pressable
-      style={styles.centerButton}
+      style={[
+        styles.centerButton,
+        { backgroundColor: paletteColors.primary.DEFAULT },
+      ]}
       onPress={handlePicturePress}
     >
-      <Ionicons name="camera" size={32} color="white" />
+      <Ionicons name="add" size={32} color="white" />
     </Pressable>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   centerButton: {
     width: 65,
     height: 65,
-    backgroundColor: 'tomato',
     borderRadius: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 60,
+    marginBottom: 55,
     elevation: 5,
     boxShadow: `0px 2px 5px rgba(0, 0, 0, 0.2)`,
   },
-})
+});
 
 export default PictureButtomTab;

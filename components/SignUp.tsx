@@ -1,3 +1,5 @@
+import { ISignUpCredentials } from '@auth/Auth.interface';
+import useAuth from '@auth/useAuth';
 import useTheme from '@theme/useTheme';
 import { Formik } from 'formik';
 import { FC } from 'react';
@@ -20,12 +22,27 @@ const schema = Yup.object().shape({
 
 const SignUp: FC<IProps> = ({ onGoSingIn }) => {
   const { paletteColors } = useTheme();
+  const { SignUpWithEmailAndPassword } = useAuth();
+
+  const handleSubmit = async (values: ISignUpCredentials) => {
+    try {
+      const response = await SignUpWithEmailAndPassword({
+        email: values.email,
+        password: values.password,
+        username: values.username,
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <View>
       <Text style={styles.title}>Create Account</Text>
-      <Formik
+      <Formik<ISignUpCredentials>
         initialValues={{ password: '', email: '', username: '' }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => handleSubmit(values)}
         validationSchema={schema}
       >
         {({

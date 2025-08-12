@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 import { Text as RNText, StyleSheet, TextStyle } from 'react-native';
 
-type FontWeight = 'bold' | 'semibold' | 'normal'
+type FontWeight = 'bold' | 'semibold' | 'normal';
 
 const Fonts: Record<FontWeight, TextStyle['fontWeight']> = {
   bold: '700',
@@ -10,28 +10,21 @@ const Fonts: Record<FontWeight, TextStyle['fontWeight']> = {
 };
 
 interface Props extends PropsWithChildren {
-  fontWeigth?: FontWeight,
-  color?: string,
-  style?: TextStyle,
+  fontWeigth?: FontWeight;
+  color?: string;
+  style?: TextStyle | TextStyle[];
 }
 
-const Text: FC<Props> = ({
-  fontWeigth = 'normal',
-  color,
-  style,
-  children,
-}) => {
-
+const Text: FC<Props> = ({ fontWeigth = 'normal', color, style, children }) => {
   const styles = StyleSheet.create({
     text: {
       fontWeight: Fonts[fontWeigth],
       color: color,
+      fontFamily: 'Merriweather-ExtraBold',
     },
   });
 
-  return (
-    <RNText style={[styles.text, style]}>{children}</RNText>
-  );
+  return <RNText style={[styles.text, style]}>{children}</RNText>;
 };
 
 export default Text;

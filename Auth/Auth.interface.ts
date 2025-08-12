@@ -4,5 +4,5 @@ export interface ISignInCredentials {
 }
 
 export interface ISignUpCredentials extends ISignInCredentials {
-  name: string;
+  username: string;
 }

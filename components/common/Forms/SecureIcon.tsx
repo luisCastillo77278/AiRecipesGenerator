@@ -9,7 +9,7 @@ interface IProps {
 }
 
 const SecureIcon: FC<IProps> = ({ secureTextEntry, onPressIcon, color }) => {
-  const secureIconName = secureTextEntry ? 'eye' : 'eye-off';
+  const secureIconName = !secureTextEntry ? 'eye' : 'eye-off';
 
   return (
     <TouchableOpacity style={styles.button} onPress={onPressIcon}>
