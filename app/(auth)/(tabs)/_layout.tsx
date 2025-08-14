@@ -1,5 +1,5 @@
 import ButtonTab from '@components/core/ButtonTab';
-import PictureButtomTab from '@components/core/PictureButtonTab';
+import PictureButtomTab from '@components/core/PictureButton';
 import useTheme from '@theme/useTheme';
 import { Tabs } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
