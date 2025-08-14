@@ -39,6 +39,21 @@ class RecipeService {
       throw error;
     }
   }
+
+  async getRecipesBulk(ids: number[]){
+    try {
+      const response = await ApiBase.get(`https://api.spoonacular.com/recipes/informationBulk`, {
+        params: {
+          ids: ids,
+          includeNutrition: true,
+        }
+      })
+      return response.data;
+    } catch(error){
+      console.error(`Error fetching recipes with IDs ${ids}:`, error);
+      throw error;
+    }
+  } 
 }
 
 export default new RecipeService();
